@@ -110,7 +110,7 @@ function endGame(){
             document.getElementById("drake").pause();
         }else if (wordToBeGuessed === "drake"){
             document.getElementById("image").src = "assets/images/drake.jpg";
-            ddocument.getElementById("jcole").pause();
+            document.getElementById("jcole").pause();
             document.getElementById("postmalone").pause();
             document.getElementById("marshmello").pause();
             document.getElementById("drake").play();
@@ -119,6 +119,11 @@ function endGame(){
 
     } else if (numGuesses === 0){
         document.getElementById("image").src ="assets/images/gameover.gif";
+        document.getElementById("jcole").pause();
+        document.getElementById("postmalone").pause();
+        document.getElementById("marshmello").pause();
+        document.getElementById("drake").pause();
+
         reset();
     }
 
