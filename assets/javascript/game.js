@@ -2,16 +2,12 @@
 var guessWords = ["jcole", "postmalone", "marshmello", "drake"];
 
 //Creating variables to track count and store values
-var wordToBeGuessed = "";
+var wordToBeGuessed;
 var lettersOfGuessWord = [];
 var letterPlaceHolder = [];
-var letterIndex = 0;
 var wrongLetters = [];
-
 var numGuesses = 8;
 var wins = 0;
-
-
 
 
 //Function to  initiate game
@@ -24,19 +20,14 @@ function startGame(){
     //Takes the randomly selected word and splits each letter into separate strings and stores the letters in the lettersOfGuessWord Array
     lettersOfGuessWord = wordToBeGuessed.split("");
 
-        console.log(lettersOfGuessWord);
-
-    //This is to take the length of the word to be guessed and set is as an number
-    letterIndex = lettersOfGuessWord.length;
-    
-    //This loop is used to generate the "_" (letter placeholder) based on the length of the lettersOfGuessWord length
-    for (var i = 0; i < letterIndex; i++){
+    //This loop is used to generate the "_" (letter placeholder) based on the letter index
+    for (var i = 0; i < lettersOfGuessWord.length; i++){
         letterPlaceHolder.push(" _ ");
     }
         console.log(letterPlaceHolder);
     
     //To communicate function with HTML
-    document.getElementById("guessword").innerHTML = letterPlaceHolder.join(" ");
+    document.getElementById("guessword").innerHTML = letterPlaceHolder.join("  ");
 
 };
 
@@ -52,14 +43,14 @@ function reset(){
 function guessCheck(letter){
     var wordLetter = false;
 
-    for (var i = 0; i < letterIndex; i++){
+    for (var i = 0; i < lettersOfGuessWord.length; i++){
         if (wordToBeGuessed[i] === letter){
             wordLetter = true;
         }
     }
 
     if (wordLetter) {
-        for (var i = 0; i < letterIndex; i++){
+        for (var i = 0; i < lettersOfGuessWord.length; i++){
             if(wordToBeGuessed[i] === letter) {
                 letterPlaceHolder[i] = letter;
             }
@@ -70,22 +61,18 @@ function guessCheck(letter){
         wrongLetters.push(letter);
         numGuesses--;
     }
-};
-
-function endGame(){
-
-    console.log("Wins:" + wins);
-    console.log("Number of Guesses Remaining" + numGuesses);
-
-    //To display wrong letters in the Letters Already Guessed Section of the page
-    document.getElementById("lettersguessed").innerHTML = wrongLetters.join(" ");
 
     //To display the number guesses remaining on the page
     document.getElementById("guessesremaining").innerHTML = numGuesses;
+        
+    //To display wrong letters in the Letters Already Guessed Section of the page
+    document.getElementById("lettersguessed").innerHTML = wrongLetters.join(" ");
 
     //To display the correct guess letters
     document.getElementById("guessword").innerHTML = letterPlaceHolder;
+};
 
+function endGame(){
 
     if (lettersOfGuessWord.toString() == letterPlaceHolder.toString()){
         wins++;
